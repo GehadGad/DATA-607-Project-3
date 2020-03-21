@@ -1,0 +1,80 @@
+---
+title: "DATA 607 Project 3"
+output: html_notebook
+---
+***Bonnie Cooper
+David Moste
+Abdellah Ait
+Gehad Gad***
+
+
+
+```{r}
+#Import libraries
+library(tidyverse)
+library(fmsb)
+library(wordcloud)
+library(tm)
+```
+
+
+```{r}
+#Corpus <- read.csv('corpus.csv')
+
+
+#Read the file from David's GitHub.
+
+Corpus <- read.csv ("https://github.com/dmoste/DATA607/raw/master/Project%203/corpus.csv
+")
+
+#Rename the headers to Word and Count instead of (X) and (x)
+
+Corpus= Corpus %>%
+  rename(Word=X, Count=x)
+
+
+#Display the data
+head(Corpus)
+
+```
+
+```{r}
+mean(Corpus$Count)
+```
+
+
+```{r}
+median(Corpus$Count)
+```
+
+
+```{r}
+var(Corpus$Count)
+```
+
+```{r}
+sd(Corpus$Count)
+```
+
+```{r}
+#Transpose the data (reversing rows and columns)
+
+Corpus2 = data.frame(t(Corpus))
+
+colnames(Corpus2)= Corpus [,1]
+
+Corpus2 <- Corpus2[-c(1), ]
+
+
+```
+
+
+
+```{r}
+
+wordcloud(words=Corpus[,1], freq = Corpus[,2] , min.freq = 1 , colors =brewer.pal(18,'Dark2') )
+
+```
+
+
+
